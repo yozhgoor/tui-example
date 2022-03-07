@@ -13,9 +13,7 @@ use tui::{
     layout::{Alignment, Constraint, Direction, Layout},
     style::{Color, Modifier, Style},
     text::{Span, Spans},
-    widgets::{
-        Block, BorderType, Borders, Paragraph, Tabs,
-    },
+    widgets::{Block, BorderType, Borders, Paragraph, Tabs},
     Terminal,
 };
 
@@ -58,7 +56,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
 
             if last_tick.elapsed() >= tick_rate {
-                if let Ok(_) = tx.send(Event::Tick) {
+                if tx.send(Event::Tick).is_ok() {
                     last_tick = Instant::now();
                 }
             }
